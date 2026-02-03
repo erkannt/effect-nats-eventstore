@@ -1,5 +1,6 @@
+import { NodeRuntime } from "@effect/platform-node";
 import { Effect, Console } from "effect";
 
 const program = Console.log("Hello, World!");
 
-Effect.runSync(program);
+NodeRuntime.runMain(program);
