@@ -19,7 +19,7 @@ const UserFacingApiGroupImplementation = HttpApiBuilder.group(
   "UserFacing",
   (handlers) =>
     handlers.handle("landing", () =>
-      Effect.succeed(HttpServerResponse.html("Hello, world")),
+      Effect.succeed(HttpServerResponse.html("Hello, world!")),
     ),
 );
 
