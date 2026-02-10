@@ -1,12 +1,12 @@
 {
   "name": "effect-nats-eventstore",
-  "type": "module",
   "version": "1.0.0",
   "description": "Exploring effect-ts and NATS",
   "main": "index.js",
   "license": "MIT",
   "packageManager": "pnpm@10.28.1",
   "devDependencies": {
+    "@tsconfig/node24": "^24.0.4",
     "@types/node": "^25.2.0",
     "oxlint": "^1.43.0",
     "oxlint-tsgolint": "^0.11.4",

@@ -1,6 +1,6 @@
 .PHONY: dev
 dev: node_modules
-	node --watch src/index.ts
+	sh start-dev-watch.sh
 
 node_modules: package.json pnpm-lock.yaml
 	pnpm install --frozen-lockfile
