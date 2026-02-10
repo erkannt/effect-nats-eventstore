@@ -2,11 +2,9 @@ import { HttpRouter, HttpServer, HttpServerResponse } from "@effect/platform";
 import { NodeHttpServer, NodeRuntime } from "@effect/platform-node";
 import { Layer, pipe } from "effect";
 import { createServer } from "node:http";
+import { landing } from "./views/landing";
 
-const Router = pipe(
-  HttpRouter.empty,
-  HttpRouter.get("/", HttpServerResponse.html("Hello, world!")),
-);
+const Router = pipe(HttpRouter.empty, HttpRouter.get("/", landing));
 
 const server = pipe(
   Router,
