@@ -1,5 +1,5 @@
-import { HttpServerRequest, HttpServerResponse } from "@effect/platform";
-import { Effect, pipe, Schema } from "effect";
+import { HttpServerRequest, HttpServerResponse } from "effect/unstable/http";
+import { Effect, Schema } from "effect";
 
 const BookFormKeys = {
   bookTitle: "bookTitle",
@@ -11,7 +11,8 @@ const BookFormSchema = Schema.Struct({
   [BookFormKeys.bookTitle]: Schema.String,
 });
 
-export const startGet = HttpServerResponse.html(`<!DOCTYPE html>
+export const startGet = Effect.succeed(
+  HttpServerResponse.html(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -36,12 +37,13 @@ export const startGet = HttpServerResponse.html(`<!DOCTYPE html>
     </form>
   </main>
 </body>
-</html>`);
+</html>`),
+);
 
 export const startPost = Effect.gen(function* () {
   const form = yield* HttpServerRequest.schemaBodyForm(BookFormSchema);
 
   console.log({ bookTitle: form.bookTitle, bookAuthor: form.bookAuthor });
 
-  return yield* HttpServerResponse.redirect("/add-book/start");
+  return HttpServerResponse.redirect("/add-book/start");
 });

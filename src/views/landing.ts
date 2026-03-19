@@ -1,6 +1,8 @@
-import { HttpServerResponse } from "@effect/platform";
+import { Effect } from "effect";
+import { HttpServerResponse } from "effect/unstable/http";
 
-export const landing = HttpServerResponse.html(`<!DOCTYPE html>
+export const landing = Effect.succeed(
+  HttpServerResponse.html(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -40,4 +42,5 @@ export const landing = HttpServerResponse.html(`<!DOCTYPE html>
     </ul>
   </main>
 </body>
-</html>`);
+</html>`),
+);

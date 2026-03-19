@@ -1,22 +1,19 @@
-import { HttpRouter, HttpServer, HttpServerResponse } from "@effect/platform";
 import { NodeHttpServer, NodeRuntime } from "@effect/platform-node";
-import { Layer, pipe } from "effect";
+import { HttpRouter } from "effect/unstable/http";
 import { createServer } from "node:http";
+import { Layer, pipe } from "effect";
 import { landing } from "./views/landing";
 import * as addBook from "./add-book";
 
-const Router = pipe(
-  HttpRouter.empty,
-  HttpRouter.get("/", landing),
-  HttpRouter.get("/add-book/start", addBook.startGet),
-  HttpRouter.post("/add-book/start", addBook.startPost),
-);
-
-const server = pipe(
-  Router,
-  HttpServer.serve(),
+const app = pipe(
+  HttpRouter.addAll([
+    HttpRouter.route("GET", "/", landing),
+    HttpRouter.route("GET", "/add-book/start", addBook.startGet),
+    HttpRouter.route("POST", "/add-book/start", addBook.startPost),
+  ]),
+  HttpRouter.serve,
   Layer.provide(NodeHttpServer.layer(createServer, { port: 8080 })),
   Layer.launch,
 );
 
-NodeRuntime.runMain(server);
+NodeRuntime.runMain(app);
