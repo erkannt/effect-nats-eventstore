@@ -1,5 +1,6 @@
 import { HttpServerRequest, HttpServerResponse } from "effect/unstable/http";
 import { Effect, Schema } from "effect";
+import { Commands } from "./commands";
 
 const BookFormKeys = {
   bookTitle: "bookTitle",
@@ -42,8 +43,9 @@ export const startGet = Effect.succeed(
 
 export const startPost = Effect.gen(function* () {
   const form = yield* HttpServerRequest.schemaBodyForm(BookFormSchema);
+  const commands = yield* Commands;
 
-  console.log({ bookTitle: form.bookTitle, bookAuthor: form.bookAuthor });
+  commands.started(form);
 
   return HttpServerResponse.redirect("/add-book/start");
 });

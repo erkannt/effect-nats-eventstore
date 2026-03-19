@@ -4,6 +4,7 @@ import { createServer } from "node:http";
 import { Layer, pipe } from "effect";
 import { landing } from "./views/landing";
 import * as addBook from "./add-book";
+import { Commands } from "./add-book/commands";
 
 const app = pipe(
   HttpRouter.addAll([
@@ -13,6 +14,7 @@ const app = pipe(
   ]),
   HttpRouter.serve,
   Layer.provide(NodeHttpServer.layer(createServer, { port: 8080 })),
+  Layer.provide(Commands.layer),
   Layer.launch,
 );
 
