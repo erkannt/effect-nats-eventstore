@@ -14,7 +14,15 @@ export const start = HttpServerResponse.html(`<!DOCTYPE html>
     <a href="/">Home</a>
   </nav>
   <main>
-    <p>to be implemented</p>
+    <form action="/add-book/start" method="post">
+      <label for="bookTitle">Book Title:</label>
+      <input type="text" id="bookTitle" name="bookTitle" required><br><br>
+
+      <label for="bookAuthor">Author:</label>
+      <input type="text" id="bookAuthor" name="bookAuthor" required><br><br>
+
+      <button type="submit">Add book to shelf</button>
+    </form>
   </main>
 </body>
 </html>`);
