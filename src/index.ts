@@ -8,7 +8,8 @@ import * as addBook from "./add-book";
 const Router = pipe(
   HttpRouter.empty,
   HttpRouter.get("/", landing),
-  HttpRouter.get("/add-book/start", addBook.start),
+  HttpRouter.get("/add-book/start", addBook.startGet),
+  HttpRouter.post("/add-book/start", addBook.startPost),
 );
 
 const server = pipe(

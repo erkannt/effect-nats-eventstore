@@ -1,6 +1,12 @@
-import { HttpServerResponse } from "@effect/platform";
+import { HttpServerRequest, HttpServerResponse } from "@effect/platform";
+import { Effect, pipe, Schema } from "effect";
 
-export const start = HttpServerResponse.html(`<!DOCTYPE html>
+const BookFormSchema = Schema.Struct({
+  bookTitle: Schema.String,
+  bookAuthor: Schema.String,
+});
+
+export const startGet = HttpServerResponse.html(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -26,3 +32,11 @@ export const start = HttpServerResponse.html(`<!DOCTYPE html>
   </main>
 </body>
 </html>`);
+
+export const startPost = pipe(
+  HttpServerRequest.schemaBodyForm(BookFormSchema),
+  Effect.andThen((form) => {
+    console.log({ bookTitle: form.bookTitle, bookAuthor: form.bookAuthor });
+    return HttpServerResponse.redirect("/add-book/start");
+  }),
+);

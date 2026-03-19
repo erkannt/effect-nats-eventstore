@@ -1,1 +1,1 @@
-export { start } from "./start";
+export { startGet, startPost } from "./start";
