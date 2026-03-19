@@ -38,10 +38,10 @@ export const startGet = HttpServerResponse.html(`<!DOCTYPE html>
 </body>
 </html>`);
 
-export const startPost = pipe(
-  HttpServerRequest.schemaBodyForm(BookFormSchema),
-  Effect.andThen((form) => {
-    console.log({ bookTitle: form.bookTitle, bookAuthor: form.bookAuthor });
-    return HttpServerResponse.redirect("/add-book/start");
-  }),
-);
+export const startPost = Effect.gen(function* () {
+  const form = yield* HttpServerRequest.schemaBodyForm(BookFormSchema);
+
+  console.log({ bookTitle: form.bookTitle, bookAuthor: form.bookAuthor });
+
+  return yield* HttpServerResponse.redirect("/add-book/start");
+});
