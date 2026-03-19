@@ -1,9 +1,14 @@
 import { HttpServerRequest, HttpServerResponse } from "@effect/platform";
 import { Effect, pipe, Schema } from "effect";
 
+const BookFormKeys = {
+  bookTitle: "bookTitle",
+  bookAuthor: "bookAuthor",
+} as const;
+
 const BookFormSchema = Schema.Struct({
-  bookTitle: Schema.String,
-  bookAuthor: Schema.String,
+  [BookFormKeys.bookAuthor]: Schema.String,
+  [BookFormKeys.bookTitle]: Schema.String,
 });
 
 export const startGet = HttpServerResponse.html(`<!DOCTYPE html>
@@ -21,11 +26,11 @@ export const startGet = HttpServerResponse.html(`<!DOCTYPE html>
   </nav>
   <main>
     <form action="/add-book/start" method="post">
-      <label for="bookTitle">Book Title:</label>
-      <input type="text" id="bookTitle" name="bookTitle" required><br><br>
+      <label for="${BookFormKeys.bookTitle}">Book Title:</label>
+      <input type="text" id="${BookFormKeys.bookTitle}" name="${BookFormKeys.bookTitle}" required>
 
-      <label for="bookAuthor">Author:</label>
-      <input type="text" id="bookAuthor" name="bookAuthor" required><br><br>
+      <label for="${BookFormKeys.bookAuthor}">Author:</label>
+      <input type="text" id="${BookFormKeys.bookAuthor}" name="${BookFormKeys.bookAuthor}" required>
 
       <button type="submit">Add book to shelf</button>
     </form>
