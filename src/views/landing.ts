@@ -11,7 +11,7 @@ export const landing = HttpServerResponse.html(`<!DOCTYPE html>
     <h1>NATS Event Sourced Bookshelf</h1>
   </header>
   <nav>
-    <a href="/add-book">Add Book</a>
+    <a href="/add-book/start">Add Book</a>
   </nav>
   <main>
     <h2>Available Books</h2>

@@ -3,8 +3,13 @@ import { NodeHttpServer, NodeRuntime } from "@effect/platform-node";
 import { Layer, pipe } from "effect";
 import { createServer } from "node:http";
 import { landing } from "./views/landing";
+import * as addBook from "./add-book";
 
-const Router = pipe(HttpRouter.empty, HttpRouter.get("/", landing));
+const Router = pipe(
+  HttpRouter.empty,
+  HttpRouter.get("/", landing),
+  HttpRouter.get("/add-book/start", addBook.start),
+);
 
 const server = pipe(
   Router,
