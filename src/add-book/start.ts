@@ -44,7 +44,7 @@ export const startGet = Effect.succeed(
 export const startPost = Effect.gen(function* () {
   const form = yield* HttpServerRequest.schemaBodyForm(BookFormSchema);
 
-  commands.started(form);
+  yield* commands.started(form);
 
   return HttpServerResponse.redirect("/add-book/start");
 });
