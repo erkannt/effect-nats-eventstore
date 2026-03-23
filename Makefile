@@ -1,6 +1,6 @@
 .PHONY: dev
 dev: node_modules
-	sh start-dev-watch.sh
+	hivemind
 
 node_modules: package.json pnpm-lock.yaml
 	pnpm install --frozen-lockfile

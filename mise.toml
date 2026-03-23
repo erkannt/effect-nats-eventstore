@@ -1,3 +1,4 @@
 [tools]
+hivemind = "latest"
 node = "24"
 pnpm = "10"
