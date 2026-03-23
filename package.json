@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@effect/platform-node": "4.0.0-beta.35",
+    "@nats-io/jetstream": "^3.3.1",
+    "@nats-io/transport-node": "^3.3.1",
     "effect": "4.0.0-beta.35"
   }
 }
